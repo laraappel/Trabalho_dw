@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+﻿$ErrorActionPreference = "Stop"
 Write-Host "Criando arquivos do painel..."
 
 New-Item -ItemType Directory -Force -Path "public\images" | Out-Null
