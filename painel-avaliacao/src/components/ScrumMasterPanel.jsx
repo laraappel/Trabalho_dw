@@ -33,9 +33,6 @@ export default function ScrumMasterPanel({ data, setData }) {
           ))}
         </tbody>
       </table>
-      <div className="note note-dark">
-        O SM não é avaliado por produzir, mas por garantir que o Scrum aconteça de verdade e por ajudar o time a evoluir de uma Sprint para a outra.
-      </div>
     </div>
   );
 }

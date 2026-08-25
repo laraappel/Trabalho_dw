@@ -34,9 +34,6 @@ export default function ProductOwnerPanel({ data, setData }) {
           ))}
         </tbody>
       </table>
-      <div className="note note-teal">
-        O PO é avaliado pela clareza dos requisitos e pelo acompanhamento da produção — não pela qualidade técnica do avião em si.
-      </div>
     </div>
   );
 }

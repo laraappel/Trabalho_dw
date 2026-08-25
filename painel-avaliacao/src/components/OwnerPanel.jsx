@@ -33,9 +33,6 @@ export default function OwnerPanel({ data, setData }) {
           ))}
         </tbody>
       </table>
-      <div className="note note-blue">
-        Essa nota avalia o desempenho no papel — não confunda com os pontos de corrupção, calculados na aba própria.
-      </div>
     </div>
   );
 }

@@ -34,9 +34,6 @@ export default function DevPanel({ data, setData }) {
           ))}
         </tbody>
       </table>
-      <div className="note note-green">
-        Reserve a coluna de destaque individual só pra casos que realmente chamem atenção, positiva ou negativamente.
-      </div>
     </div>
   );
 }
