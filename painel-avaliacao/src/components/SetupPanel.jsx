@@ -121,11 +121,6 @@ export default function SetupPanel({ data, setData }) {
                 </div>
             </div>
 
-            <div className="note note-dark">
-                Dica: os nomes de empresa já vêm pré-preenchidos a partir das imagens que você enviou (Maverick Aviation e
-                SkyForge Ind. Aeronáutica). Pode alterar se quiser.
-            </div>
-
             <h2 style={{ marginTop: "1.6rem" }}>Pesos da Nota Final</h2>
             <div className="desc">
                 Ajuste o peso de cada papel no cálculo da nota final da empresa (aba "Resultado Final").
