@@ -120,7 +120,7 @@ select, .obs-input{
 .tag-unassigned{color:var(--red);font-weight:700;font-size:0.75rem;}
 .tag-assigned{color:var(--teal);font-weight:700;font-size:0.75rem;}
 
-/* Escalação tab */
+/* EscalaÃ§Ã£o tab */
 .company-block{margin-bottom:1.6rem;}
 .company-header{display:flex;align-items:center;gap:1rem;margin-bottom:0.9rem;}
 .company-header img{width:5.5rem;height:5.5rem;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:0.5rem;padding:0.3rem;}

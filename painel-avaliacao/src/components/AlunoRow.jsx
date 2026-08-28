@@ -1,84 +1,38 @@
-import React from "react";
+﻿import { PAPEIS, TIMES } from "../data/initialData";
 
-export default function AlunoRow({ aluno, index, data, setData }) {
-  const empresas = [
-    data.meta.empresaA,
-    data.meta.empresaB,
-  ];
-
-  const times = ["", "Caça", "Transporte"];
-
-  const papeis = [
-    "",
-    "Scrum Master",
-    "Product Owner",
-    "Owner/Stakeholder",
-    "Developer",
-    "Comprador - Governo",
-    "Comprador - Militar",
-    "Comprador - Setor Privado",
-  ];
-
-  function atualizarAluno(campo, valor) {
-    setData((atual) => ({
-      ...atual,
-      alunos: atual.alunos.map((item, i) =>
-        i === index
-          ? { ...item, [campo]: valor }
-          : item
-      ),
-    }));
-  }
+// Props: aluno, index, empresas (array com as 2 empresas), onFieldChange(path, value)
+export default function AlunoRow({ aluno: a, index: i, empresas, onFieldChange }) {
+  const needsEmpresa =
+    a.papel === "Scrum Master" || a.papel === "Owner/Stakeholder" ||
+    a.papel === "Product Owner" || a.papel === "Developer";
+  const needsTime = a.papel === "Product Owner" || a.papel === "Developer";
 
   return (
     <tr>
-      <td>{aluno.nome}</td>
-
+      <td>{a.id}</td>
+      <td style={{ textAlign: "left" }}>{a.nome}</td>
       <td>
-        <select
-          value={aluno.empresa}
-          onChange={(e) =>
-            atualizarAluno("empresa", e.target.value)
-          }
-        >
-          <option value="">—</option>
-
-          {empresas.map((empresa) => (
-            <option key={empresa} value={empresa}>
-              {empresa}
-            </option>
+        <select value={a.papel} onChange={e => onFieldChange(`alunos.${i}.papel`, e.target.value)}>
+          {PAPEIS.map(p => (
+            <option key={p} value={p}>{p === "" ? "â€” nÃ£o atribuÃ­do â€”" : p}</option>
           ))}
         </select>
       </td>
-
       <td>
-        <select
-          value={aluno.time}
-          onChange={(e) =>
-            atualizarAluno("time", e.target.value)
-          }
-        >
-          {times.map((time) => (
-            <option key={time} value={time}>
-              {time || "—"}
-            </option>
-          ))}
-        </select>
+        {needsEmpresa && (
+          <select value={a.empresa} onChange={e => onFieldChange(`alunos.${i}.empresa`, e.target.value)}>
+            <option value="">â€”</option>
+            {empresas.map(e => <option key={e} value={e}>{e}</option>)}
+          </select>
+        )}
       </td>
-
       <td>
-        <select
-          value={aluno.papel}
-          onChange={(e) =>
-            atualizarAluno("papel", e.target.value)
-          }
-        >
-          {papeis.map((papel) => (
-            <option key={papel} value={papel}>
-              {papel || "—"}
-            </option>
-          ))}
-        </select>
+        {needsTime && (
+          <select value={a.time} onChange={e => onFieldChange(`alunos.${i}.time`, e.target.value)}>
+            <option value="">â€”</option>
+            {TIMES.map(t => <option key={t} value={t}>{t}</option>)}
+          </select>
+        )}
       </td>
     </tr>
   );

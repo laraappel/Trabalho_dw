@@ -1,160 +1,53 @@
-import React from "react";
+﻿import { sprintCellLabel } from "../utils/sprintLabel";
+import SimNaoSelect from "./campos/SimNaoSelect";
+import ScoreSelect from "./campos/ScoreSelect";
+import ObsInput from "./campos/ObsInput";
 
-export default function BuyerProfilePanel({ data, setData }) {
-  function atualizarCampo(index, campo, valor) {
-    setData((atual) => ({
-      ...atual,
-      buyerProf: atual.buyerProf.map((item, i) =>
-        i === index
-          ? { ...item, [campo]: valor }
-          : item
-      ),
-    }));
-  }
-
+// Props: rows (data.buyerProf), onFieldChange(path, value)
+export default function BuyerProfilePanel({ rows, onFieldChange }) {
   return (
     <div className="panel">
-      <h2>Compradores — Desempenho no Papel</h2>
-
-      <div className="desc">
-        Avaliação do professor sobre como cada comprador exerceu seu papel.
-      </div>
-
+      <h2>Compradores â€” Desempenho no Papel</h2>
+      <div className="desc">AvaliaÃ§Ã£o do professor sobre como cada comprador exerceu seu papel.</div>
       <table>
         <thead>
           <tr>
             <th>Sprint</th>
             <th>Comprador</th>
-            <th>
-              Aplicou o checklist
-              <br />
-              de verificação?
-            </th>
-            <th>
-              Decisões coerentes
-              <br />
-              com o papel?
-            </th>
-            <th>
-              Feedback construtivo
-              <br />
-              nas Reviews?
-            </th>
+            <th>Aplicou o checklist<br />de verificaÃ§Ã£o?</th>
+            <th>DecisÃµes coerentes<br />com o papel?</th>
+            <th>Feedback construtivo<br />nas Reviews?</th>
             <th>Nota (1-5)</th>
-            <th>Observações</th>
+            <th>ObservaÃ§Ãµes</th>
           </tr>
         </thead>
-
         <tbody>
-          {data.buyerProf.map((item, index) => {
-            const mostrarSprint =
-              index === 0 ||
-              item.sprint !== data.buyerProf[index - 1].sprint;
-
-            return (
-              <tr key={index}>
-                <td className="sprint-label">
-                  {mostrarSprint ? `Sprint ${item.sprint}` : ""}
-                </td>
-
-                <td>{item.comprador}</td>
-
-                <td>
-                  <select
-                    value={item.checklist}
-                    onChange={(e) =>
-                      atualizarCampo(
-                        index,
-                        "checklist",
-                        e.target.value
-                      )
-                    }
-                  >
-                    <option value="">—</option>
-                    <option value="S">Sim</option>
-                    <option value="N">Não</option>
-                  </select>
-                </td>
-
-                <td>
-                  <select
-                    value={item.decisoes}
-                    onChange={(e) =>
-                      atualizarCampo(
-                        index,
-                        "decisoes",
-                        e.target.value
-                      )
-                    }
-                  >
-                    <option value="">—</option>
-                    <option value="S">Sim</option>
-                    <option value="N">Não</option>
-                  </select>
-                </td>
-
-                <td>
-                  <select
-                    value={item.feedback}
-                    onChange={(e) =>
-                      atualizarCampo(
-                        index,
-                        "feedback",
-                        e.target.value
-                      )
-                    }
-                  >
-                    <option value="">—</option>
-                    <option value="S">Sim</option>
-                    <option value="N">Não</option>
-                  </select>
-                </td>
-
-                <td>
-                  <select
-                    value={item.nota}
-                    onChange={(e) =>
-                      atualizarCampo(
-                        index,
-                        "nota",
-                        e.target.value
-                      )
-                    }
-                  >
-                    <option value="">—</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                </td>
-
-                <td>
-                  <input
-                    className="obs-input"
-                    type="text"
-                    value={item.obs}
-                    placeholder=""
-                    onChange={(e) =>
-                      atualizarCampo(
-                        index,
-                        "obs",
-                        e.target.value
-                      )
-                    }
-                  />
-                </td>
-              </tr>
-            );
-          })}
+          {rows.map((r, i) => (
+            <tr key={i}>
+              <td className="sprint-label">{sprintCellLabel(rows, i, "sprint")}</td>
+              <td>{r.comprador}</td>
+              <td>
+                <SimNaoSelect value={r.checklist} onChange={v => onFieldChange(`buyerProf.${i}.checklist`, v)} />
+              </td>
+              <td>
+                <SimNaoSelect value={r.decisoes} onChange={v => onFieldChange(`buyerProf.${i}.decisoes`, v)} />
+              </td>
+              <td>
+                <SimNaoSelect value={r.feedback} onChange={v => onFieldChange(`buyerProf.${i}.feedback`, v)} />
+              </td>
+              <td>
+                <ScoreSelect value={r.nota} onChange={v => onFieldChange(`buyerProf.${i}.nota`, v)} />
+              </td>
+              <td>
+                <ObsInput value={r.obs} onChange={v => onFieldChange(`buyerProf.${i}.obs`, v)} />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
-
       <div className="note note-orange">
-        Critério-guia: avalie se o comprador aplicou o checklist a cada
-        Sprint, se as decisões foram coerentes com o papel, e se o
-        feedback nas Reviews foi útil.
+        CritÃ©rio-guia: avalie se o comprador aplicou o checklist a cada Sprint, se as decisÃµes
+        foram coerentes com o papel, e se o feedback nas Reviews foi Ãºtil.
       </div>
     </div>
   );

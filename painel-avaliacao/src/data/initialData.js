@@ -1,6 +1,8 @@
-﻿
+﻿// =====================================================================
+// CONSTANTS
+// =====================================================================
 export const SPRINTS = [1, 2, 3];
-export const TIMES = ["Caça", "Transporte"];
+export const TIMES = ["CaÃ§a", "Transporte"];
 export const BUYERS = ["Governo", "Militar", "Setor Privado"];
 export const PAPEIS = [
   "", "Scrum Master", "Product Owner", "Owner/Stakeholder", "Developer",
@@ -8,14 +10,14 @@ export const PAPEIS = [
 ];
 
 export const SEED_NAMES = [
-  "ALAN FERREIRA DE OLIVEIRA", "ANDRÉ LUIZ VICENZI RIGO", "ARTHUR HENRIQUE LORENZETT",
+  "ALAN FERREIRA DE OLIVEIRA", "ANDRÃ‰ LUIZ VICENZI RIGO", "ARTHUR HENRIQUE LORENZETT",
   "BRUNO DE DAVID REIS", "CARLOS EDUARDO ALMEIDA DA CONCEICAO", "CARLOS JHONATAS DE SOUZA AMORIM",
-  "CAUAN BRUNO ALTHAUS RIFFEL", "FILIPE GABRIEL HOLLMANN", "FILIPE JOSÉ DA COSTA NUNES",
+  "CAUAN BRUNO ALTHAUS RIFFEL", "FILIPE GABRIEL HOLLMANN", "FILIPE JOSÃ‰ DA COSTA NUNES",
   "GABRIEL CRISTIAN VIVIAN SOMARIVA", "GABRIEL DE CARVALHO BARRETO", "GIOVANI RICARDO POTT",
   "GUSTAVO SCHWITZKI PERETTI", "ISAEL SOARES DOS SANTOS", "JADSON BUTZK",
-  "JÉSSICA FERNANDA RUBAS", "JOÃO VITOR RAIMUNDI", "KAUAN LUCAS TOLDO",
+  "JÃ‰SSICA FERNANDA RUBAS", "JOÃƒO VITOR RAIMUNDI", "KAUAN LUCAS TOLDO",
   "LEONARDO SCHIMIDT LOPES", "LORENZO PIVA MAY", "MARIA EDUARDA EMELAU JOBIM",
-  "MATTEO DALLA COSTA THOMÉ", "NATAN ELIAS PATZLAFF", "NICOLAS LISBOA FIGUEIREDO MULLER",
+  "MATTEO DALLA COSTA THOMÃ‰", "NATAN ELIAS PATZLAFF", "NICOLAS LISBOA FIGUEIREDO MULLER",
   "NICOLE BONASSI BET", "RAFAEL WILLIAM HAUPT FLORES", "SAMIRA GREGORIO VIEIRA",
   "VICENTE DAGOSTIN PILONETTO", "VINICIUS TEBALDI BORSATTI", "WILLIAM KUNZLER",
   "YASMIN MARIA ZERBIELLI",
@@ -23,8 +25,8 @@ export const SEED_NAMES = [
 
 // OBS: caminhos de imagem devem apontar para /images/... (pasta public/images)
 export const TEAM_IMAGES = {
-  "Maverick Aviation": { logo: "/images/maverick_caca.jpg", Caça: "/images/maverick_caca.jpg", Transporte: "/images/maverick_cargo.jpg" },
-  "SkyForge Ind. Aeronáutica": { logo: "/images/skyforge_caca.jpg", Caça: "/images/skyforge_caca.jpg", Transporte: "/images/skyforge_cargo.jpg" },
+  "Maverick Aviation": { logo: "/images/maverick_caca.jpg", CaÃ§a: "/images/maverick_caca.jpg", Transporte: "/images/maverick_cargo.jpg" },
+  "SkyForge Ind. AeronÃ¡utica": { logo: "/images/skyforge_caca.jpg", CaÃ§a: "/images/skyforge_caca.jpg", Transporte: "/images/skyforge_cargo.jpg" },
 };
 
 export const BUYER_IMAGES = {
@@ -39,6 +41,13 @@ export const ROLE_COLORS = {
   "Comprador - Setor Privado": "#E8871E",
 };
 
+// =====================================================================
+// DATA MODEL
+// =====================================================================
+
+// Monta o estado inicial do painel a partir dos nomes das duas empresas.
+// Usado pelo App.jsx tanto para comeÃ§ar do zero quanto (com o mesmo
+// princÃ­pio) para popular o estado quando dados salvos sÃ£o carregados.
 export function buildInitialData(empresaA, empresaB) {
   const empresas = [empresaA, empresaB];
   const sm = [], owner = [];
@@ -61,19 +70,19 @@ export function buildInitialData(empresaA, empresaB) {
   const buyerProduct = [];
   SPRINTS.forEach(sp => {
     empresas.forEach(emp => {
-      buyerProduct.push({ sprint: sp, comprador: "Governo", empresa: emp, produto: "Caça", pt: "", pv: "", prazo: "", comOwner: "", sinal: "", decisao: "", nota: "" });
+      buyerProduct.push({ sprint: sp, comprador: "Governo", empresa: emp, produto: "CaÃ§a", pt: "", pv: "", prazo: "", comOwner: "", sinal: "", decisao: "", nota: "" });
       buyerProduct.push({ sprint: sp, comprador: "Governo", empresa: emp, produto: "Transporte", pt: "", pv: "", prazo: "", comOwner: "", sinal: "", decisao: "", nota: "" });
-      buyerProduct.push({ sprint: sp, comprador: "Militar", empresa: emp, produto: "Caça", pt: "", pv: "", prazo: "", comOwner: "", sinal: "", decisao: "", nota: "" });
+      buyerProduct.push({ sprint: sp, comprador: "Militar", empresa: emp, produto: "CaÃ§a", pt: "", pv: "", prazo: "", comOwner: "", sinal: "", decisao: "", nota: "" });
       buyerProduct.push({ sprint: sp, comprador: "Setor Privado", empresa: emp, produto: "Transporte", pt: "", pv: "", prazo: "", comOwner: "", sinal: "", decisao: "", nota: "" });
     });
   });
 
   const corrupcao = { empresaCorruptora: empresaA, primeiraDescoberta: false, primeiroComprador: "", segundaDescoberta: false, segundoComprador: "" };
-  const sabotagem = { empresaSabotador: empresaA, timeSabotador: "Caça", tipoAcao: "atrapalhar", denunciasConsecutivas: 0, descoberto: false, areaSoubeECalou: false };
+  const sabotagem = { empresaSabotador: empresaA, timeSabotador: "CaÃ§a", tipoAcao: "atrapalhar", denunciasConsecutivas: 0, descoberto: false, areaSoubeECalou: false };
   const weights = { sm: 1, owner: 1, po: 1, dev: 2, buyer: 2 };
   const teamNames = {
-    [empresaA]: { Caça: "Esquadrão Falcon", Transporte: "Falcon Carggo" },
-    [empresaB]: { Caça: "SkyForge Combat", Transporte: "SkyForge Transport" },
+    [empresaA]: { CaÃ§a: "EsquadrÃ£o Falcon", Transporte: "Falcon Carggo" },
+    [empresaB]: { CaÃ§a: "SkyForge Combat", Transporte: "SkyForge Transport" },
   };
   const alunos = SEED_NAMES.map((nome, i) => ({ id: i + 1, nome, empresa: "", time: "", papel: "" }));
 
@@ -83,6 +92,7 @@ export function buildInitialData(empresaA, empresaB) {
   };
 }
 
+// MÃ©dia simples, ignorando valores vazios/nÃ£o numÃ©ricos.
 export function avg(arr) {
   const nums = arr.map(v => parseFloat(v)).filter(v => !isNaN(v));
   if (!nums.length) return null;
